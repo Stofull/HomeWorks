@@ -1,21 +1,12 @@
-﻿using System;
-using System.Threading.Tasks;
-using Grpc.Net.Client;
-using GreetingApp;
+﻿using Grpc.Net.Client;
 
-class Program
-{
-    static async Task Main(string[] args)
-    {
-        using var channel = GrpcChannel.ForAddress("https://localhost:5001");
-        var client = new GreetingService.GreetingServiceClient(channel);
+using var channel = GrpcChannel.ForAddress("https://localhost:5001");
 
-        Console.WriteLine("Enter your name:");
-        var name = Console.ReadLine();
+Console.WriteLine("Enter your name:");
+var name = Console.ReadLine();
+var client = new Greeter
 
-        var request = new HelloRequest { Name = name };
-        var reply = await client.SayHelloAsync(request);
+var request = new HelloRequest { Name = name };
+var reply = await client.SayHelloAsync(request);
 
-        Console.WriteLine($"Server Response: {reply.Message}");
-    }
-}
+Console.WriteLine($"Server Response: {reply.Message}");
